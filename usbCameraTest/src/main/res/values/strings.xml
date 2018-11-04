@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  UVCCamera
   ~  library and sample to access to UVC web camera on non-rooted Android device
   ~
@@ -23,4 +22,16 @@
   -->
 <resources>
     <string name="app_name">USBCameraTest</string>
+    <string name="logout">Logout</string>
+    <string name="select_webcam">select webcam</string>
+    <string name="take_picture">Take picture</string>
+    <string name="take_again">take again</string>
+    <string name="date">DATE</string>
+    <string name="type_of_inspection">TYPE OF INSPECTION</string>
+    <string name="save">Save</string>
+    <string name="generate_pdf">GENERATE PDF</string>
+    <string name="change_language">change language</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="change_logo">change logo</string>
+
 </resources>

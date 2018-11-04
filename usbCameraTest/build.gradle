@@ -24,20 +24,19 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdkVersion versionCompiler
-	buildToolsVersion versionBuildTool
+    compileSdkVersion versionCompiler
 
-	compileOptions {
-		sourceCompatibility javaSourceCompatibility
-		targetCompatibility javaTargetCompatibility
-	}
+    compileOptions {
+        sourceCompatibility javaSourceCompatibility
+        targetCompatibility javaTargetCompatibility
+    }
 
     defaultConfig {
         applicationId "com.serenegiant.usbcameratest"
-        minSdkVersion 14
-		targetSdkVersion versionTarget
-		versionCode 8
-		versionName "3.00"
+        minSdkVersion 19
+        targetSdkVersion versionTarget
+        versionCode 8
+        versionName "3.00"
     }
 
     buildTypes {
@@ -46,8 +45,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.1.2'
     compile project(':libuvccamera')
+    compile 'com.android.support:design:25.4.0'
+    compile 'com.google.firebase:firebase-database:16.0.1'
+    compile 'com.google.firebase:firebase-core:16.0.0'
+    compile 'com.wdullaer:materialdatetimepicker:3.6.2'
+    compile 'io.paperdb:paperdb:2.6'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
 }
+
+repositories {
+    google()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
+buildscript {
+    repositories {
+        google()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+}
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.0.0'
+            }
+        }
+    }
+}
+apply plugin: 'com.google.gms.google-services'

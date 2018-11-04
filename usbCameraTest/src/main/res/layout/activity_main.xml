@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  UVCCamera
   ~  library and sample to access to UVC web camera on non-rooted Android device
   ~
@@ -21,27 +20,288 @@
   ~  Files in the libjpeg-turbo, libusb, libuvc, rapidjson folder
   ~  may have a different license, see the respective files.
   -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.serenegiant.usbcameratest.MainActivity"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame">
 
-    <com.serenegiant.widget.SimpleUVCCameraTextureView
-        android:id="@+id/UVCCameraTextureView1"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:src="@drawable/logo"/>
+
+            <ImageView
+                android:id="@+id/optins"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/vertical_dots"
+                android:layout_alignParentRight="true"/>
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/logout"-->
+                <!--android:id="@+id/logout"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp" />-->
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="#ff000000" />
+        android:nestedScrollingEnabled="false"
+        android:layout_below="@id/toolbar">
 
-    <ImageButton
-        android:id="@+id/camera_button"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:contentDescription="@string/camera"
-        android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_camera" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</FrameLayout>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/camera_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_webcam"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true" />
+
+            <com.serenegiant.widget.SimpleUVCCameraTextureView
+                android:id="@+id/UVCCameraTextureView1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/camera_button"
+                android:layout_marginTop="10dp"
+                android:background="#ff000000" />
+
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/camera_button"
+                android:layout_marginTop="10dp" />
+
+
+            <LinearLayout
+                android:id="@+id/LinearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/UVCCameraTextureView1"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+
+                <Button
+                    android:id="@+id/btnTakeImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/take_picture"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:id="@+id/btnAgain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/take_again"
+                    android:layout_marginLeft="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/LinearLayout1"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp" />
+
+                <Button
+                    android:id="@+id/btnPdf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/generate_pdf"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pdf_layout"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="72dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/pdf_logo"
+                    android:src="@drawable/logo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Inspection Report"
+                        android:textStyle="bold"
+                        android:textSize="30sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_date_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="12-12-12"/>
+
+                    <TextView
+                        android:id="@+id/tv_type_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/type_of_inspection"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="type here"/>
+
+                    <TextView
+                        android:id="@+id/tv_place_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inspection_place"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:text="place here"/>
+
+                    <TextView
+                        android:id="@+id/tv_findings_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/findings"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/findings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:text="findings here"/>
+
+                    <TextView
+                        android:id="@+id/tv_observations_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/observation"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/observations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:text="observations here"/>
+
+                    <TextView
+                        android:id="@+id/tv_name_heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inspector_name"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inspector name here"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_image"
+                    android:layout_width="match_parent"
+                    android:visibility="invisible"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="84dp"
+                    android:adjustViewBounds="true"
+                    android:id="@+id/pdf_image" />
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

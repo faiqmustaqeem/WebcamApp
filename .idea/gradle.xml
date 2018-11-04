@@ -11,14 +11,6 @@
             <option value="$PROJECT_DIR$/libuvccamera" />
             <option value="$PROJECT_DIR$/usbCameraCommon" />
             <option value="$PROJECT_DIR$/usbCameraTest" />
-            <option value="$PROJECT_DIR$/usbCameraTest0" />
-            <option value="$PROJECT_DIR$/usbCameraTest2" />
-            <option value="$PROJECT_DIR$/usbCameraTest3" />
-            <option value="$PROJECT_DIR$/usbCameraTest4" />
-            <option value="$PROJECT_DIR$/usbCameraTest5" />
-            <option value="$PROJECT_DIR$/usbCameraTest6" />
-            <option value="$PROJECT_DIR$/usbCameraTest7" />
-            <option value="$PROJECT_DIR$/usbCameraTest8" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

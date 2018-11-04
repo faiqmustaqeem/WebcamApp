@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "988381926970",
+    "firebase_url": "https://webcam-app-d6a67.firebaseio.com",
+    "project_id": "webcam-app-d6a67",
+    "storage_bucket": "webcam-app-d6a67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988381926970:android:174bb900a20935d2",
+        "android_client_info": {
+          "package_name": "com.serenegiant.usbcameratest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988381926970-i21omopkgba788ugd5p6i63l8rskluf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgl5b8ph9-rEayP74hd4yGzpLW4KPNKww"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
