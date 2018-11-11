@@ -27,6 +27,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -143,7 +144,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
 
     TextView tv_date , tv_type , tv_place , tv_findings , tv_observations , tv_name;
 
-    int pageHeight=720;
+    int pageHeight=792;
 
 
 
@@ -295,7 +296,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
         String base64=SharedPreferenceHelper.getSharedPreferenceString(MainActivity.this , "logo","");
         if(base64.equals(""))
         {
-            pdf_logo.setImageResource(R.drawable.logo);
+            pdf_logo.setImageResource(R.drawable.logo_black);
         }
         else {
             try
@@ -304,7 +305,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
             }
             catch (Exception ex)
             {
-                pdf_logo.setImageResource(R.drawable.logo);
+                pdf_logo.setImageResource(R.drawable.logo_black);
             }
 
         }
@@ -439,6 +440,9 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
                                     printPDF(pdf_layout);
                                 }
                             }, 1000);
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "you have not taken anty picture yet", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -603,11 +607,15 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
             .show();
     }
 
+    PrintManager printManager;
     public void printPDF(View view) {
-        PrintManager printManager = (PrintManager) getSystemService(PRINT_SERVICE);
+         printManager = (PrintManager) getSystemService(PRINT_SERVICE);
+        assert printManager != null;
         printManager.print("print_any_view_job_name", new ViewPrintAdapter(this,
                 view), null);
     }
+
+
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -653,7 +661,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
 
             boolean isMultiplePage = false;
             int totalPages = 1;
-            Log.e("height", mView.getHeight() + "");
+
             if (mView.getHeight() > pageHeight) {
                 isMultiplePage = true;
             }
@@ -664,7 +672,6 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
             if (!isMultiplePage) {
                 // Start the page
                 PdfDocument.Page page = mDocument.startPage(0);
-
 
                 // Create a bitmap and put it a canvas for the view to draw to. Make it the size of the view
                 Bitmap bitmap = Bitmap.createBitmap(mView.getWidth(), mView.getHeight(),
@@ -690,6 +697,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
 
                 mDocument.finishPage(page);
             } else {
+
                 for (int i = 0; i < totalPages; i++) {
                     PdfDocument.Page page = mDocument.startPage(i);
 
@@ -775,6 +783,7 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
         }
         mUVCCameraView = null;
         mCameraButton = null;
+
         super.onDestroy();
     }
 
@@ -951,8 +960,19 @@ public final class MainActivity extends BaseActivity implements CameraDialog.Cam
     }
     private List<PictureModel> getAllPicturesFromDB()
     {
-        List<PictureModel> list= Paper.book().read("pictures");
-        return list;
+        List<PictureModel> list;
+        try{
+            list=Paper.book().read("pictures");
+            if(list==null)
+            {
+                return new ArrayList<>();
+            }
+            return list;
+        }
+       catch (Exception e)
+       {
+           return  new ArrayList<>();
+       }
     }
 
     private String bitmapToBase64(Bitmap bitmap) {

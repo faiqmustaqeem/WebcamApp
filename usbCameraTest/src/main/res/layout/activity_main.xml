@@ -173,11 +173,12 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:id="@+id/pdf_logo"
-                    android:src="@drawable/logo" />
+                    android:src="@drawable/logo_black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -241,6 +242,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/findings"
                         android:textSize="16sp"
+                        android:layout_marginTop="30dp"
                         android:textStyle="bold"
                         />
 
@@ -291,7 +293,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="84dp"
+                    android:layout_marginTop="100dp"
                     android:adjustViewBounds="true"
                     android:id="@+id/pdf_image" />
 
